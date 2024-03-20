@@ -1,107 +1,202 @@
+// To parse this JSON data, do
+//
+//     final weather = weatherFromJson(jsonString);
+
+import 'package:meta/meta.dart';
+import 'dart:convert';
+
+Weather weatherFromJson(String str) => Weather.fromJson(json.decode(str));
+
+String weatherToJson(Weather data) => json.encode(data.toJson());
+
 class Weather {
-  Location? location;
-  Current? current;
-  Condition? condition;
+  final location;
+  final current;
 
-  Weather({required this.location, required this.current, required this.condition});
-
-  factory Weather.fromJson(Map<String, dynamic> json) {
-    return Weather(
-      current: json['current'] != null ? Current.fromJson(json['current']) : null,
-      location: json['location'] != null ? Location.fromJson(json['location']) : null,
-      condition: json['condition'] != null ? Condition.fromJson(json['condition']) : null,
-    );
-  }
-}
-
-class Location {
-  String? name, region, country, tz_id, localtime;
-  double? lat, lon, localtime_epoch;
-
-  Location({
-    required this.name,
-    required this.country,
-    required this.localtime,
-    required this.region,
-    required this.tz_id,
-    required this.lat,
-    required this.localtime_epoch,
-    required this.lon,
+  Weather({
+     this.location,
+     this.current,
   });
 
-  factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
-      name: json['name'],
-      region: json['region'],
-      country: json['country'],
-      lat: json['lat']?.toDouble(),
-      lon: json['lon']?.toDouble(),
-      tz_id: json['tz_id'],
-      localtime: json['localtime'],
-      localtime_epoch: json['localtime_epoch']?.toDouble(),
-    );
-  }
+  factory Weather.fromJson(Map<String, dynamic> json) => Weather(
+    location: Location.fromJson(json["location"]),
+    current: Current.fromJson(json["current"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "location": location.toJson(),
+    "current": current.toJson(),
+  };
 }
 
 class Current {
-  double? last_updated_epoch,
-      temp_c,
-      temp_f,
-      wind_mph,
-      pressure_in,
-      feelslike_c,
-      feelslike_f,
-      gust_mph,
-      gust_kph;
-  Condition? condition;
-  int? day;
+  int lastUpdatedEpoch;
+  String lastUpdated;
+  double tempC;
+  double tempF;
+  int isDay;
+  Condition condition;
+  double windMph;
+  int windKph;
+  int windDegree;
+  String windDir;
+  int pressureMb;
+  double pressureIn;
+  int precipMm;
+  int precipIn;
+  int humidity;
+  int cloud;
+  int feelslikeC;
+  int feelslikeF;
+  int visKm;
+  int visMiles;
+  int uv;
+  int gustMph;
+  double gustKph;
 
   Current({
+    required this.lastUpdatedEpoch,
+    required this.lastUpdated,
+    required this.tempC,
+    required this.tempF,
+    required this.isDay,
     required this.condition,
-    required this.day,
-    required this.feelslike_c,
-    required this.feelslike_f,
-    required this.gust_kph,
-    required this.gust_mph,
-    required this.last_updated_epoch,
-    required this.pressure_in,
-    required this.temp_c,
-    required this.temp_f,
-    required this.wind_mph,
+    required this.windMph,
+    required this.windKph,
+    required this.windDegree,
+    required this.windDir,
+    required this.pressureMb,
+    required this.pressureIn,
+    required this.precipMm,
+    required this.precipIn,
+    required this.humidity,
+    required this.cloud,
+    required this.feelslikeC,
+    required this.feelslikeF,
+    required this.visKm,
+    required this.visMiles,
+    required this.uv,
+    required this.gustMph,
+    required this.gustKph,
   });
 
-  factory Current.fromJson(Map<String, dynamic> json) {
-    return Current(
-      condition: json['condition'] != null ? Condition.fromJson(json['condition']) : null,
-      day: json['day'],
-      feelslike_c: json['feelslike_c']?.toDouble(),
-      feelslike_f: json['feelslike_f']?.toDouble(),
-      gust_kph: json['gust_kph']?.toDouble(),
-      gust_mph: json['gust_mph']?.toDouble(),
-      last_updated_epoch: json['last_updated_epoch']?.toDouble(),
-      pressure_in: json['pressure_in']?.toDouble(),
-      temp_c: json['temp_c']?.toDouble(),
-      temp_f: json['temp_f']?.toDouble(),
-      wind_mph: json['wind_mph']?.toDouble(),
-    );
-  }
+  factory Current.fromJson(Map<String, dynamic> json) => Current(
+    lastUpdatedEpoch: json["last_updated_epoch"],
+    lastUpdated: json["last_updated"],
+    tempC: json["temp_c"].toDouble(),
+    tempF: json["temp_f"].toDouble(),
+    isDay: json["is_day"],
+    condition: Condition.fromJson(json["condition"]),
+    windMph: json["wind_mph"].toDouble(),
+    windKph: json["wind_kph"],
+    windDegree: json["wind_degree"],
+    windDir: json["wind_dir"],
+    pressureMb: json["pressure_mb"],
+    pressureIn: json["pressure_in"].toDouble(),
+    precipMm: json["precip_mm"],
+    precipIn: json["precip_in"],
+    humidity: json["humidity"],
+    cloud: json["cloud"],
+    feelslikeC: json["feelslike_c"],
+    feelslikeF: json["feelslike_f"],
+    visKm: json["vis_km"],
+    visMiles: json["vis_miles"],
+    uv: json["uv"],
+    gustMph: json["gust_mph"],
+    gustKph: json["gust_kph"].toDouble(),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "last_updated_epoch": lastUpdatedEpoch,
+    "last_updated": lastUpdated,
+    "temp_c": tempC,
+    "temp_f": tempF,
+    "is_day": isDay,
+    "condition": condition.toJson(),
+    "wind_mph": windMph,
+    "wind_kph": windKph,
+    "wind_degree": windDegree,
+    "wind_dir": windDir,
+    "pressure_mb": pressureMb,
+    "pressure_in": pressureIn,
+    "precip_mm": precipMm,
+    "precip_in": precipIn,
+    "humidity": humidity,
+    "cloud": cloud,
+    "feelslike_c": feelslikeC,
+    "feelslike_f": feelslikeF,
+    "vis_km": visKm,
+    "vis_miles": visMiles,
+    "uv": uv,
+    "gust_mph": gustMph,
+    "gust_kph": gustKph,
+  };
 }
 
 class Condition {
-  String? text, icon;
-  int? code;
+  String text;
+  String icon;
+  int code;
 
   Condition({
+    required this.text,
     required this.icon,
     required this.code,
-    required this.text,
   });
 
-  factory Condition.fromJson(Map<String, dynamic> json) {
-    return Condition(
-      icon: json['icon'],
-      code: json['code'],
-      text: json['text'],
-    );
-  }
+  factory Condition.fromJson(Map<String, dynamic> json) => Condition(
+    text: json["text"],
+    icon: json["icon"],
+    code: json["code"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "text": text,
+    "icon": icon,
+    "code": code,
+  };
+}
+
+class Location {
+  String name;
+  String region;
+  String country;
+  double lat;
+  double lon;
+  String tzId;
+  int localtimeEpoch;
+  String localtime;
+
+  Location({
+    required this.name,
+    required this.region,
+    required this.country,
+    required this.lat,
+    required this.lon,
+    required this.tzId,
+    required this.localtimeEpoch,
+    required this.localtime,
+  });
+
+  factory Location.fromJson(Map<String, dynamic> json) => Location(
+    name: json["name"],
+    region: json["region"],
+    country: json["country"],
+    lat: json["lat"].toDouble(),
+    lon: json["lon"].toDouble(),
+    tzId: json["tz_id"],
+    localtimeEpoch: json["localtime_epoch"],
+    localtime: json["localtime"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "region": region,
+    "country": country,
+    "lat": lat,
+    "lon": lon,
+    "tz_id": tzId,
+    "localtime_epoch": localtimeEpoch,
+    "localtime": localtime,
+  };
 }

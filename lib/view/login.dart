@@ -16,6 +16,8 @@ class _LoginState extends State<Login> {
   void _loginHome(){
     Navigator.pushReplacementNamed(context, RouteName.bottomscreen);
   }
+  TextEditingController name=TextEditingController();
+  TextEditingController email=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +43,7 @@ class _LoginState extends State<Login> {
                 height: 100,
               ),
               Cust_text(
+                controller:name ,
                 icon: const Icon(Icons.person),
                 label: "User name",
                 obscure: false,
@@ -49,6 +52,7 @@ class _LoginState extends State<Login> {
                 height: 15,
               ),
               Cust_text(
+                controller: email,
                 icon: const Icon(Icons.password),
                 label: "Password",
                 obscure: true,

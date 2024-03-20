@@ -1,8 +1,9 @@
 import 'package:climatecast/routes/name_route.dart';
-import 'package:climatecast/view/login.dart';
 import 'package:climatecast/widget/cust_button.dart';
 import 'package:climatecast/widget/cust_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Sigin extends StatefulWidget {
   const Sigin({super.key});
@@ -12,6 +13,10 @@ class Sigin extends StatefulWidget {
 }
 
 class _SiginState extends State<Sigin> {
+  TextEditingController name=TextEditingController();
+  TextEditingController email=TextEditingController();
+  TextEditingController pass=TextEditingController();
+  TextEditingController cpass=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +41,7 @@ class _SiginState extends State<Sigin> {
                 height: 50,
               ),
               Cust_text(
+                controller: name,
                 icon: const Icon(Icons.person),
                 label: 'Username',
                 obscure: false,
@@ -44,6 +50,7 @@ class _SiginState extends State<Sigin> {
                 height: 10,
               ),
               Cust_text(
+                controller: email,
                 icon: const Icon(Icons.email),
                 label: 'Email',
                 obscure: false,
@@ -52,6 +59,7 @@ class _SiginState extends State<Sigin> {
                 height: 20,
               ),
               Cust_text(
+                controller: pass,
                 icon: const Icon(Icons.password),
                 label: 'Password',
                 obscure: true,
@@ -60,6 +68,7 @@ class _SiginState extends State<Sigin> {
                 height: 10,
               ),
               Cust_text(
+                controller: cpass,
                 icon: const Icon(Icons.password),
                 label: 'Confirm Password',
                 obscure: true,
@@ -68,7 +77,9 @@ class _SiginState extends State<Sigin> {
                 height: 30,
               ),
               MyButton(
-                onPressed: (){},
+                onPressed: (){
+                  googlesignout();
+                },
                 title: 'Sign up',
                 color: Colors.deepPurple,
                 textcolor: Colors.white,
@@ -81,7 +92,9 @@ class _SiginState extends State<Sigin> {
                 height: 20,
               ),
               MyButton(
-                onPressed: (){},
+                onPressed: (){
+                  googleSigin();
+                },
                 title: 'Sigin in with Google',
                 color: Colors.white,
                 textcolor: Colors.deepPurple,
@@ -110,5 +123,21 @@ class _SiginState extends State<Sigin> {
         ),
       ),
     );
+  }
+  void googleSigin()async{
+     GoogleSignInAccount? googleSignInAccount=await GoogleSignIn().signIn();
+    if(googleSignInAccount!=null){
+    GoogleSignInAuthentication googleSignInAuthentication=await googleSignInAccount.authentication;
+
+    var credential=GoogleAuthProvider.credential(
+    accessToken: googleSignInAuthentication.accessToken,
+    idToken: googleSignInAuthentication.idToken
+    );
+    await FirebaseAuth.instance.signInWithCredential(credential);
+    }
+  }
+  googlesignout()async{
+    await GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
   }
 }

@@ -13,10 +13,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final controller=Get.put(HomeController());
-    final value=controller.weatherinfo[0];
     return  Scaffold(
       backgroundColor: Colors.grey.shade300,
-      body: SafeArea(
+      body:  SafeArea(
         child: Padding(
           padding:const EdgeInsets.symmetric(horizontal: 40),
           child: Column(
@@ -28,8 +27,8 @@ class _HomeState extends State<Home> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(value.current!.last_updated_epoch.toString()),
-                 const Row(
+                  Text(controller.data.value.location['name']),
+                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -41,14 +40,14 @@ class _HomeState extends State<Home> {
                   )
                 ],
               ),
-             const SizedBox(
+             SizedBox(
                 height: 300,
               ),
-              const Text('26*',style: TextStyle(fontSize: 90,fontWeight: FontWeight.w900),),
-              const SizedBox(
+              Text('26*',style: TextStyle(fontSize: 90,fontWeight: FontWeight.w900),),
+              SizedBox(
                 height: 5,
               ),
-              const Text('clear',style: TextStyle(color: Colors.red,fontSize: 20),)
+              Text('clear',style: TextStyle(color: Colors.red,fontSize: 20),)
             ],
           ),
         ),

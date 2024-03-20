@@ -3,12 +3,14 @@ class Cust_text extends StatelessWidget {
   Icon icon;
   String label;
   bool obscure;
+  var controller;
 
   Cust_text({
     super.key,
     required this.icon,
     required this.label,
-    required this.obscure
+    required this.obscure,
+    required this.controller
   });
 
   @override
@@ -16,6 +18,7 @@ class Cust_text extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal:25),
       child: TextField(
+        controller: controller,
         obscureText: obscure,
         decoration: InputDecoration(
           //border: InputBorder.none,
