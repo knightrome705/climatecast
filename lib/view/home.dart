@@ -27,8 +27,8 @@ class _HomeState extends State<Home> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(controller.data.value.location['name']),
-                 Row(
+                  Obx(()=> Text(controller.data.value?.location.region??"null")),
+                 const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -40,14 +40,23 @@ class _HomeState extends State<Home> {
                   )
                 ],
               ),
-             SizedBox(
-                height: 300,
-              ),
-              Text('26*',style: TextStyle(fontSize: 90,fontWeight: FontWeight.w900),),
-              SizedBox(
+             Obx(()=> Image.network('https:${controller.data.value?.current.condition.icon}')),
+             // const SizedBox(
+             //    height: 300,
+             //  ),
+              Obx(()=> Text('${controller.data.value!.current.tempC}°C',style: const TextStyle(fontSize: 90,fontWeight: FontWeight.w900),)),
+              const SizedBox(
                 height: 5,
               ),
-              Text('clear',style: TextStyle(color: Colors.red,fontSize: 20),)
+              Obx(()=> Text(controller.data.value?.current.condition.text??"nodata",style: const TextStyle(color: Colors.red,fontSize: 20),)),
+              const SizedBox(
+                height: 20,
+              ),
+               Obx(()=> Text('${controller.data.value!.current.tempF}°F',style: const TextStyle(fontSize: 90,fontWeight: FontWeight.w900),)),
+              const SizedBox(
+                height: 20,
+              ),
+              Obx(()=> Text(controller.data.value!.current.lastUpdated,style: const TextStyle(fontSize: 20),))
             ],
           ),
         ),

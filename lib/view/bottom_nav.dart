@@ -10,7 +10,7 @@ class Bottom extends StatefulWidget {
 
 class _BottomState extends State<Bottom> {
    int currentIndex=0;
-   var pages=[Home(),Settings()];
+   var pages=[const Home(),const Settings()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

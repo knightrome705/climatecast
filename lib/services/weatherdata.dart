@@ -5,10 +5,11 @@ import 'package:http/http.dart' as http;
 class WheatherServices{
  static var client=http.Client();
 
-  static Future<Weather?> getWheatherData()async{
-    var response=await client.get(Uri.parse('https://newsapi.org/v2/everything?q=keyword&apiKey=8bfaaf2415b742bebba0d93fc194e6ad'));
+  static Future<dynamic> getWheatherData()async{
+    var response=await client.get(Uri.parse('https://api.weatherapi.com/v1/current.json?q=kannur&key=61b4a2d4296240e6b3a113030242502'));
     if(response.statusCode==200){
       var jsondata=response.body;
+      print(jsondata);
       return weatherFromJson(jsondata);
     }else{
    Get.snackbar('error',response.statusCode.toString());

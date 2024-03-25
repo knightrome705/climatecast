@@ -10,12 +10,12 @@ Weather weatherFromJson(String str) => Weather.fromJson(json.decode(str));
 String weatherToJson(Weather data) => json.encode(data.toJson());
 
 class Weather {
-  final location;
-  final current;
+  Location location;
+  Current current;
 
   Weather({
-     this.location,
-     this.current,
+    required this.location,
+    required this.current,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) => Weather(
@@ -37,21 +37,21 @@ class Current {
   int isDay;
   Condition condition;
   double windMph;
-  int windKph;
+  double windKph;
   int windDegree;
   String windDir;
-  int pressureMb;
+  double pressureMb;
   double pressureIn;
-  int precipMm;
-  int precipIn;
+  double precipMm;
+  double precipIn;
   int humidity;
   int cloud;
-  int feelslikeC;
-  int feelslikeF;
-  int visKm;
-  int visMiles;
-  int uv;
-  int gustMph;
+  double feelslikeC;
+  double feelslikeF;
+  double visKm;
+  double visMiles;
+  double uv;
+  double gustMph;
   double gustKph;
 
   Current({
@@ -87,8 +87,8 @@ class Current {
     tempF: json["temp_f"].toDouble(),
     isDay: json["is_day"],
     condition: Condition.fromJson(json["condition"]),
-    windMph: json["wind_mph"].toDouble(),
-    windKph: json["wind_kph"],
+    windMph: json["wind_mph"],
+    windKph: json["wind_kph"].toDouble(),
     windDegree: json["wind_degree"],
     windDir: json["wind_dir"],
     pressureMb: json["pressure_mb"],
@@ -97,12 +97,12 @@ class Current {
     precipIn: json["precip_in"],
     humidity: json["humidity"],
     cloud: json["cloud"],
-    feelslikeC: json["feelslike_c"],
-    feelslikeF: json["feelslike_f"],
+    feelslikeC: json["feelslike_c"].toDouble(),
+    feelslikeF: json["feelslike_f"].toDouble(),
     visKm: json["vis_km"],
     visMiles: json["vis_miles"],
     uv: json["uv"],
-    gustMph: json["gust_mph"],
+    gustMph: json["gust_mph"].toDouble(),
     gustKph: json["gust_kph"].toDouble(),
   );
 

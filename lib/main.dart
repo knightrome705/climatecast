@@ -18,10 +18,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: RouteName.siginscreen,
       onGenerateRoute: Routes.generateRoute,
+      // theme: ThemeData(
+      //   brightness: Brightness.dark,
+      //   useMaterial3: true,
+      //),
+        // darkTheme: ThemeData.dark(),
+    // );
     );
   }
 }
