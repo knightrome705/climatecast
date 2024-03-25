@@ -7,7 +7,8 @@ import '../models/weathermodel.dart';
 
 
 class HomeController extends GetxController{
-  var data = Rxn<Weather>();
+
+  var data=<Weather>[].obs;
    Future<void> getCurrentWeather()async{
    var weather=await WheatherServices.getWheatherData();
    if(weather!=null){

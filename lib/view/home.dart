@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Obx(()=> Text(controller.data.value?.location.region??"null")),
+                  // Obx(()=> Text(controller.data.value?.location.region??"null")),
                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -40,23 +40,23 @@ class _HomeState extends State<Home> {
                   )
                 ],
               ),
-             Obx(()=> Image.network('https:${controller.data.value?.current.condition.icon}')),
+             // Obx(()=> Image.network('https:${controller.data.value?.current.condition.icon}')),
              // const SizedBox(
              //    height: 300,
              //  ),
-              Obx(()=> Text('${controller.data.value!.current.tempC}°C',style: const TextStyle(fontSize: 90,fontWeight: FontWeight.w900),)),
+             //  Obx(()=> Text('${controller.data.value!.current.tempC}°C',style: const TextStyle(fontSize: 90,fontWeight: FontWeight.w900),)),
               const SizedBox(
                 height: 5,
               ),
-              Obx(()=> Text(controller.data.value?.current.condition.text??"nodata",style: const TextStyle(color: Colors.red,fontSize: 20),)),
+              // Obx(()=> Text(controller.data.value?.current.condition.text??"nodata",style: const TextStyle(color: Colors.red,fontSize: 20),)),
               const SizedBox(
                 height: 20,
               ),
-               Obx(()=> Text('${controller.data.value!.current.tempF}°F',style: const TextStyle(fontSize: 90,fontWeight: FontWeight.w900),)),
+               // Obx(()=> Text('${controller.data.value!.current.tempF}°F',style: const TextStyle(fontSize: 90,fontWeight: FontWeight.w900),)),
               const SizedBox(
                 height: 20,
               ),
-              Obx(()=> Text(controller.data.value!.current.lastUpdated,style: const TextStyle(fontSize: 20),))
+              // Obx(()=> Text(controller.data.value!.current.lastUpdated,style: const TextStyle(fontSize: 20),))
             ],
           ),
         ),
